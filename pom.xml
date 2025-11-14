@@ -10,4 +10,30 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>com.mycompany.do_an.Do_an</exec.mainClass>
     </properties>
+    <dependencies>
+        <!-- Timing Framework (hiệu ứng animation Swing) -->
+        <dependency>
+            <groupId>net.java.dev.timingframework</groupId>
+            <artifactId>timingframework</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>11.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <!-- Thêm resource từ src/main/java -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.png</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.jpeg</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
