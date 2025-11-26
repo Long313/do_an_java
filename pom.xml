@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
-        <exec.mainClass>com.mycompany.do_an.Do_an</exec.mainClass>
+        <exec.mainClass>com.raven.main.Main</exec.mainClass>
     </properties>
     <dependencies>
         <!-- Timing Framework (hiệu ứng animation Swing) -->
@@ -24,16 +24,37 @@
         </dependency>
     </dependencies>
     <build>
-        <resources>
-            <!-- Thêm resource từ src/main/java -->
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.png</include>
-                    <include>**/*.jpg</include>
-                    <include>**/*.jpeg</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
+    <resources>
+        <resource>
+            <directory>src/main/java</directory>
+            <includes>
+                <include>**/*.png</include>
+                <include>**/*.jpg</include>
+                <include>**/*.jpeg</include>
+            </includes>
+        </resource>
+    </resources>
+
+    <plugins>
+        <!-- Maven Compiler Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+                <release>25</release>
+            </configuration>
+        </plugin>
+
+        <!-- Exec Maven Plugin để chạy class Main -->
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <mainClass>com.raven.main.Main</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
