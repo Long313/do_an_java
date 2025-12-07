@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
-        <exec.mainClass>com.raven.main.Main</exec.mainClass>
+        <exec.mainClass>com.main.Main</exec.mainClass>
     </properties>
     <dependencies>
         <!-- Timing Framework (hiệu ứng animation Swing) -->
@@ -45,14 +45,12 @@
                 <release>25</release>
             </configuration>
         </plugin>
-
-        <!-- Exec Maven Plugin để chạy class Main -->
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.1.0</version>
             <configuration>
-                <mainClass>com.raven.main.Main</mainClass>
+                <mainClass>com.main.Main</mainClass>
             </configuration>
         </plugin>
     </plugins>
