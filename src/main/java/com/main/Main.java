@@ -3,6 +3,8 @@ package com.main;
 import com.event.EventColorChange;
 import com.form.Home_Form;
 import com.form.Setting_Form;
+import com.form.Department_Form;
+import com.form.Staff_Form;
 import com.menu.EventMenu;
 import com.properties.SystemProperties;
 import com.theme.SystemTheme;
@@ -12,7 +14,9 @@ import java.awt.Color;
 
 public class Main extends javax.swing.JFrame {
 
-    private Setting_Form settingForm;
+    private Setting_Form settingForm;   
+    private Department_Form staffForm;
+
 
     public Main() {
         initComponents();
@@ -28,6 +32,10 @@ public class Main extends javax.swing.JFrame {
             public void selectedMenu(int index) {
                 if (index == 0) {
                     mainBody.displayForm(new Home_Form());
+                } else if (index == 1) {
+                    mainBody.displayForm(new Department_Form());
+                } else if (index == 2) {
+                    mainBody.displayForm(new Staff_Form());
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Setting");
                 }

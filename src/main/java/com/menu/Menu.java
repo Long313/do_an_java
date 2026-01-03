@@ -54,16 +54,17 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void initMenu() {
-        addMenu("Dashboard", "1", 0);
-        addMenu("Staff", "2", 1);
-        addMenu("Sale", "3", 2);
-        addMenu("Data", "4", 3);
-        addMenu("Report", "5", 4);
-        addMenu("User", "6", 5);
-        addMenu("Setting", "7", 6);
-        addMenu("Expense", "8", 7);
-        addMenu("Income", "9", 8);
-        addMenu("Message", "10", 9);
+        addMenu("Dashboard", "0", 0);
+        addMenu("Deparment", "1", 1);       
+        addMenu("Staff", "2", 2);
+        addMenu("Sale", "3", 3);
+        addMenu("Data", "4", 4);
+        addMenu("Report", "5", 5);
+        addMenu("User", "6", 6);
+        addMenu("Setting", "7", 7);
+//        addMenu("Expense", "8", 8);
+        addMenu("Income", "9", 9);
+        addMenu("Message", "10", 10);
         //  add more menu here
         menu.repaint();
         menu.revalidate();
@@ -191,12 +192,12 @@ public class Menu extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(117, 117, 117));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Dashboard UI");
+        jLabel1.setText("Dashboard");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(154, 154, 154));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Admin");
+        jLabel2.setText("Store Management");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
