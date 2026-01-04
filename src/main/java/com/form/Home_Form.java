@@ -1,6 +1,8 @@
 package com.form;
 
+import com.component.DoanhThuChartPanel;
 import com.component.Form;
+import java.awt.BorderLayout;
 //import com.component.DanhSachPB;
 //import java.awt.BorderLayout;
 
@@ -8,16 +10,23 @@ public class Home_Form extends Form {
 
     public Home_Form() {
         initComponents();
-//        initDanhSachPB();
+        initChart();
     }
 
-//    private void initDanhSachPB() {
-//        this.setLayout(new BorderLayout());
-//        DanhSachPB pbPanel = new DanhSachPB();
-//        this.add(pbPanel, BorderLayout.CENTER);
-//        this.revalidate();
-//        this.repaint();
-//    }
+    private void initChart() {
+        // Set layout cho form
+        this.setLayout(new BorderLayout());
+
+        // Tạo panel biểu đồ
+        DoanhThuChartPanel chartPanel = new DoanhThuChartPanel();
+
+        // Thêm vào form
+        this.add(chartPanel, BorderLayout.CENTER);
+
+        // Refresh
+        this.revalidate();
+        this.repaint();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

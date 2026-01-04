@@ -19,6 +19,7 @@ com\menu\Menu.class
 com\component\ColorOption$3.class
 com\form\Setting_Form.class
 com\theme\ThemeColor.class
+com\component\DoanhThuChartPanel.class
 com\main\Main$3.class
 com\swing\win_button\WinButton.class
 com\component\DanhSachPB$5.class
