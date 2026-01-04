@@ -57,8 +57,8 @@ public class Menu extends javax.swing.JPanel {
         addMenu("Dashboard", "0", 0);
         addMenu("Deparment", "1", 1);       
         addMenu("Staff", "2", 2);
-        addMenu("Sale", "3", 3);
-        addMenu("Data", "4", 4);
+        addMenu("Product", "3", 3);
+        addMenu("Bills", "4", 4);
         addMenu("Report", "5", 5);
         addMenu("User", "6", 6);
         addMenu("Setting", "7", 7);

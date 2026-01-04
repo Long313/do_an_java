@@ -1,7 +1,9 @@
 package com.pojo;
+
 import java.util.Date;
 
 public class NhanVien {
+
     private int maNV;
     private String hoten, phai;
     private Date ngaysinh;
@@ -11,7 +13,7 @@ public class NhanVien {
     private boolean trangthai;
 
     public NhanVien(int maNV, String hoten, String phai, Date ngaysinh,
-                    String diachi, float luong, int phong, boolean trangthai) {
+            String diachi, float luong, int phong, boolean trangthai) {
         this.maNV = maNV;
         this.hoten = hoten;
         this.phai = phai;
@@ -87,5 +89,10 @@ public class NhanVien {
 
     public void setTrangthai(boolean trangthai) {
         this.trangthai = trangthai;
+    }
+
+    @Override
+    public String toString() {
+        return this.hoten; // hiển thị tên nhân viên
     }
 }

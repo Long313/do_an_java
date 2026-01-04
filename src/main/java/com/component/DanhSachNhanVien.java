@@ -7,7 +7,11 @@ import com.pojo.PhongBan;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 public class DanhSachNhanVien extends JPanel {
@@ -34,7 +38,7 @@ public class DanhSachNhanVien extends JPanel {
             v.add(nv.getDiachi());
             v.add(nv.getLuong());
             v.add(nv.getPhong());
-            v.add(nv.isTrangthai());
+            v.add(nv.isTrangthai() ? "Đang làm" : "Nghỉ làm");
             dtm.addRow(v);
         }
     }
@@ -53,11 +57,23 @@ public class DanhSachNhanVien extends JPanel {
 
         txtMaNV = new JTextField();
         txtHoTen = new JTextField();
-        cboPhai = new JComboBox<>(new String[]{"Nam", "Nữ"});
-        txtNgaySinh = new JTextField();
+        cboGioiTinh = new JComboBox<>(new String[]{"Nam", "Nữ"});
         txtDiaChi = new JTextField();
         txtLuong = new JTextField();
         cboPhong = new JComboBox<>();
+
+        // ===== Custom DatePicker cho ngày sinh =====
+        datePickerPanel = new JPanel(new BorderLayout(5, 0));
+        txtNgaySinh = new JTextField();
+        txtNgaySinh.setEditable(false);
+        txtNgaySinh.setPreferredSize(new Dimension(250, 30));
+        btnDatePicker = new JButton("📅");
+        btnDatePicker.setPreferredSize(new Dimension(40, 30));
+        btnDatePicker.addActionListener(e -> showDatePickerDialog());
+        datePickerPanel.add(txtNgaySinh, BorderLayout.CENTER);
+        datePickerPanel.add(btnDatePicker, BorderLayout.EAST);
+        selectedDate = new Date();
+        updateDateDisplay();
 
         chkTrangThai = new JCheckBox("Đang làm");
         chkTrangThai.setForeground(java.awt.Color.WHITE);
@@ -78,7 +94,7 @@ public class DanhSachNhanVien extends JPanel {
         tblNhanVien.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Mã NV", "Họ Tên", "Phái", "Ngày Sinh",
+                    "Mã NV", "Họ Tên", "Giới Tính", "Ngày Sinh",
                     "Địa Chỉ", "Lương", "Phòng", "Trạng Thái"
                 }
         ));
@@ -90,7 +106,7 @@ public class DanhSachNhanVien extends JPanel {
 
         JLabel[] labels = {
             new JLabel("Mã NV"), new JLabel("Họ tên"),
-            new JLabel("Phái"), new JLabel("Ngày sinh (yyyy-mm-dd)"),
+            new JLabel("Giới tính"), new JLabel("Ngày sinh"),
             new JLabel("Địa chỉ"), new JLabel("Lương"),
             new JLabel("Phòng"), new JLabel("Trạng thái")
         };
@@ -115,15 +131,16 @@ public class DanhSachNhanVien extends JPanel {
                                         .addComponent(labels[6])
                                         .addComponent(labels[7]))
                                 .addGap(20)
-                                .addGroup(layout.createParallelGroup()
-                                        .addComponent(txtMaNV)
-                                        .addComponent(txtHoTen)
-                                        .addComponent(cboPhai)
-                                        .addComponent(txtNgaySinh)
-                                        .addComponent(txtDiaChi)
-                                        .addComponent(txtLuong)
-                                        .addComponent(cboPhong)
-                                        .addComponent(chkTrangThai)))
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtMaNV, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtHoTen, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboGioiTinh, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(datePickerPanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtLuong, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboPhong, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(chkTrangThai))
+                        )
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThem)
                                 .addGap(20)
@@ -141,8 +158,8 @@ public class DanhSachNhanVien extends JPanel {
                         .addGap(10)
                         .addGroup(layout.createParallelGroup().addComponent(labels[0]).addComponent(txtMaNV))
                         .addGroup(layout.createParallelGroup().addComponent(labels[1]).addComponent(txtHoTen))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[2]).addComponent(cboPhai))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[3]).addComponent(txtNgaySinh))
+                        .addGroup(layout.createParallelGroup().addComponent(labels[2]).addComponent(cboGioiTinh))
+                        .addGroup(layout.createParallelGroup().addComponent(labels[3]).addComponent(datePickerPanel))
                         .addGroup(layout.createParallelGroup().addComponent(labels[4]).addComponent(txtDiaChi))
                         .addGroup(layout.createParallelGroup().addComponent(labels[5]).addComponent(txtLuong))
                         .addGroup(layout.createParallelGroup().addComponent(labels[6]).addComponent(cboPhong))
@@ -158,6 +175,77 @@ public class DanhSachNhanVien extends JPanel {
         );
     }
 
+    // ================= DATE PICKER DIALOG =================
+    private void showDatePickerDialog() {
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Chọn Ngày", true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setLocationRelativeTo(this);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(selectedDate);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        // Year
+        JPanel yearPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        yearPanel.add(new JLabel("Năm:"));
+        SpinnerNumberModel yearModel = new SpinnerNumberModel(cal.get(Calendar.YEAR), 1900, 2100, 1);
+        JSpinner spinYear = new JSpinner(yearModel);
+        yearPanel.add(spinYear);
+        panel.add(yearPanel);
+
+        // Month
+        JPanel monthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        monthPanel.add(new JLabel("Tháng:"));
+        SpinnerNumberModel monthModel = new SpinnerNumberModel(cal.get(Calendar.MONTH) + 1, 1, 12, 1);
+        JSpinner spinMonth = new JSpinner(monthModel);
+        monthPanel.add(spinMonth);
+        panel.add(monthPanel);
+
+        // Day
+        JPanel dayPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        dayPanel.add(new JLabel("Ngày:"));
+        SpinnerNumberModel dayModel = new SpinnerNumberModel(cal.get(Calendar.DAY_OF_MONTH), 1, 31, 1);
+        JSpinner spinDay = new JSpinner(dayModel);
+        dayPanel.add(spinDay);
+        panel.add(dayPanel);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
+        JButton okBtn = new JButton("OK");
+        JButton cancelBtn = new JButton("Hủy");
+
+        okBtn.addActionListener(e -> {
+            try {
+                int year = (Integer) spinYear.getValue();
+                int month = (Integer) spinMonth.getValue() - 1;
+                int day = (Integer) spinDay.getValue();
+                cal.set(year, month, day);
+                selectedDate = cal.getTime();
+                updateDateDisplay();
+                dialog.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Ngày không hợp lệ");
+            }
+        });
+
+        cancelBtn.addActionListener(e -> dialog.dispose());
+
+        buttonPanel.add(okBtn);
+        buttonPanel.add(cancelBtn);
+        panel.add(buttonPanel);
+
+        dialog.add(panel);
+        dialog.setSize(300, 200);
+        dialog.setVisible(true);
+    }
+
+    private void updateDateDisplay() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        txtNgaySinh.setText(sdf.format(selectedDate));
+    }
+
     // ================= CRUD =================
     private void themNhanVien() {
         try {
@@ -165,6 +253,7 @@ public class DanhSachNhanVien extends JPanel {
             if (NhanVienDAO.themNhanVien(nv)) {
                 JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
                 loadData();
+                xoaForm();
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -173,7 +262,7 @@ public class DanhSachNhanVien extends JPanel {
                     "Lỗi dữ liệu: " + e.getMessage(),
                     "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace(); // RẤT QUAN TRỌNG khi debug
+            e.printStackTrace();
         }
     }
 
@@ -182,10 +271,17 @@ public class DanhSachNhanVien extends JPanel {
             JOptionPane.showMessageDialog(this, "Chưa nhập Mã NV");
             return;
         }
-        int maNV = Integer.parseInt(txtMaNV.getText());
-        if (NhanVienDAO.xoaNhanVien(maNV)) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-            loadData();
+        try {
+            int maNV = Integer.parseInt(txtMaNV.getText());
+            if (NhanVienDAO.xoaNhanVien(maNV)) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                loadData();
+                xoaForm();
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Mã NV phải là số");
         }
     }
 
@@ -194,12 +290,16 @@ public class DanhSachNhanVien extends JPanel {
             JOptionPane.showMessageDialog(this, "Nhập Mã NV cần đọc");
             return;
         }
-        int maNV = Integer.parseInt(txtMaNV.getText());
-        NhanVien nv = NhanVienDAO.layNhanVien(maNV);
-        if (nv != null) {
-            hienThiForm(nv);
-        } else {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên");
+        try {
+            int maNV = Integer.parseInt(txtMaNV.getText());
+            NhanVien nv = NhanVienDAO.layNhanVien(maNV);
+            if (nv != null) {
+                hienThiForm(nv);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Mã NV phải là số");
         }
     }
 
@@ -210,11 +310,12 @@ public class DanhSachNhanVien extends JPanel {
             }
 
             NhanVien nv = layDuLieuForm();
-            nv.setMaNV(Integer.parseInt(txtMaNV.getText())); // 🔥 QUAN TRỌNG
+            nv.setMaNV(Integer.parseInt(txtMaNV.getText()));
 
             if (NhanVienDAO.capNhatNhanVien(nv)) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 loadData();
+                xoaForm();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -225,9 +326,12 @@ public class DanhSachNhanVien extends JPanel {
     private NhanVien layDuLieuForm() {
 
         if (txtHoTen.getText().trim().isEmpty()
-                || txtNgaySinh.getText().trim().isEmpty()
                 || txtLuong.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("Vui lòng nhập đầy đủ dữ liệu");
+        }
+
+        if (txtNgaySinh.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("Vui lòng chọn ngày sinh");
         }
 
         PhongBan pb = (PhongBan) cboPhong.getSelectedItem();
@@ -237,16 +341,9 @@ public class DanhSachNhanVien extends JPanel {
 
         NhanVien nv = new NhanVien();
         nv.setHoten(txtHoTen.getText());
-        nv.setPhai(cboPhai.getSelectedItem().toString());
+        nv.setPhai(cboGioiTinh.getSelectedItem().toString());
+        nv.setNgaysinh(new java.sql.Date(selectedDate.getTime()));
 
-        // ✅ CHECK FORMAT NGÀY SINH
-        try {
-            nv.setNgaysinh(java.sql.Date.valueOf(txtNgaySinh.getText().trim()));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Ngày sinh phải đúng định dạng yyyy-mm-dd");
-        }
-
-        // ✅ CHECK LƯƠNG
         try {
             nv.setLuong(Float.parseFloat(txtLuong.getText().trim()));
         } catch (Exception e) {
@@ -263,8 +360,9 @@ public class DanhSachNhanVien extends JPanel {
     private void hienThiForm(NhanVien nv) {
         txtMaNV.setText(String.valueOf(nv.getMaNV()));
         txtHoTen.setText(nv.getHoten());
-        cboPhai.setSelectedItem(nv.getPhai());
-        txtNgaySinh.setText(nv.getNgaysinh().toString());
+        cboGioiTinh.setSelectedItem(nv.getPhai());
+        selectedDate = nv.getNgaysinh();
+        updateDateDisplay();
         txtDiaChi.setText(nv.getDiachi());
         txtLuong.setText(String.valueOf(nv.getLuong()));
         chkTrangThai.setSelected(nv.isTrangthai());
@@ -277,9 +375,26 @@ public class DanhSachNhanVien extends JPanel {
         }
     }
 
+    private void xoaForm() {
+        txtMaNV.setText("");
+        txtHoTen.setText("");
+        txtDiaChi.setText("");
+        txtLuong.setText("");
+        cboGioiTinh.setSelectedIndex(0);
+        selectedDate = new Date();
+        updateDateDisplay();
+        chkTrangThai.setSelected(false);
+        if (cboPhong.getItemCount() > 0) {
+            cboPhong.setSelectedIndex(0);
+        }
+    }
+
     // ================= VARIABLES =================
-    private JTextField txtMaNV, txtHoTen, txtNgaySinh, txtDiaChi, txtLuong;
-    private JComboBox<String> cboPhai;
+    private JTextField txtMaNV, txtHoTen, txtDiaChi, txtLuong, txtNgaySinh;
+    private JPanel datePickerPanel;
+    private JButton btnDatePicker;
+    private Date selectedDate;
+    private JComboBox<String> cboGioiTinh;
     private JComboBox<PhongBan> cboPhong;
     private JCheckBox chkTrangThai;
     private JButton btnThem, btnXoa, btnDoc, btnLuu;

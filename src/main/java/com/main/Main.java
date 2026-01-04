@@ -1,9 +1,11 @@
 package com.main;
 
 import com.event.EventColorChange;
+import com.form.Bills_Form;
 import com.form.Home_Form;
 import com.form.Setting_Form;
 import com.form.Department_Form;
+import com.form.Product_Form;
 import com.form.Staff_Form;
 import com.menu.EventMenu;
 import com.properties.SystemProperties;
@@ -36,6 +38,10 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(new Department_Form());
                 } else if (index == 2) {
                     mainBody.displayForm(new Staff_Form());
+                } else if (index == 3) {
+                    mainBody.displayForm(new Product_Form());
+                } else if (index == 4) {
+                    mainBody.displayForm(new Bills_Form());
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Setting");
                 }

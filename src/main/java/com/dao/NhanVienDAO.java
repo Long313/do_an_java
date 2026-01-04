@@ -1,6 +1,6 @@
 package com.dao;
 
-import dataprovider.SQLServerDataProvider;
+import dataprovider.DataProvider;
 import com.pojo.NhanVien;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class NhanVienDAO {
     // ================= SELECT =================
     public static ArrayList<NhanVien> layDanhSachNhanVien() {
         ArrayList<NhanVien> dsNV = new ArrayList<>();
-        SQLServerDataProvider provider = new SQLServerDataProvider();
+        DataProvider provider = new DataProvider();
 
         try {
             provider.open();
@@ -43,7 +43,7 @@ public class NhanVienDAO {
                 + "(\"HoTen\",\"Phai\",\"NgaySinh\",\"DiaChi\",\"Luong\",\"Phong\",\"TrangThai\") "
                 + "VALUES (?,?,?,?,?,?,?) RETURNING \"MaNV\"";
 
-        SQLServerDataProvider provider = new SQLServerDataProvider();
+        DataProvider provider = new DataProvider();
 
         try {
             provider.open();
@@ -90,7 +90,7 @@ public class NhanVienDAO {
                 nv.getMaNV()
         );
 
-        SQLServerDataProvider provider = new SQLServerDataProvider();
+        DataProvider provider = new DataProvider();
         try {
             provider.open();
             return provider.executeUpdate(sql) == 1;
@@ -102,7 +102,7 @@ public class NhanVienDAO {
     // ================= DELETE =================
     public static boolean xoaNhanVien(int maNV) {
         String sql = "DELETE FROM \"NhanVien\" WHERE \"MaNV\"=" + maNV;
-        SQLServerDataProvider provider = new SQLServerDataProvider();
+        DataProvider provider = new DataProvider();
         try {
             provider.open();
             return provider.executeUpdate(sql) == 1;
@@ -113,7 +113,7 @@ public class NhanVienDAO {
 
     // ================= SELECT ONE =================
     public static NhanVien layNhanVien(int maNV) {
-        SQLServerDataProvider provider = new SQLServerDataProvider();
+        DataProvider provider = new DataProvider();
         try {
             provider.open();
             String sql = "SELECT * FROM \"NhanVien\" WHERE \"MaNV\"=" + maNV;
