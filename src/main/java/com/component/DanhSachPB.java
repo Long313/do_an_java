@@ -46,7 +46,6 @@ public class DanhSachPB extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         txtTenPB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenPBActionPerformed(evt);
@@ -113,35 +112,7 @@ public class DanhSachPB extends javax.swing.JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-//        layout.setHorizontalGroup(
-//                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-//                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-//                                        .addGroup(layout.createSequentialGroup()
-//                                                .addContainerGap()
-//                                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE,
-//                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                                                .addContainerGap())
-//                                        .addGroup(layout.createSequentialGroup()
-//                                                .addContainerGap()
-//                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-//                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-//                                                        .addGroup(layout.createSequentialGroup()
-//                                                                .addComponent(btnThemPhong)
-//                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                                                                .addComponent(btnDoc)
-//                                                                .addGap(105, 105, 105)
-//                                                                .addComponent(btnLuu))
-//                                                        .addGroup(layout.createSequentialGroup()
-//                                                                .addComponent(jLabel2)
-//                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                                                                .addComponent(txtTenPB, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-//                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-//                                                                .addComponent(jLabel1)
-//                                                                .addGap(25, 25, 25)
-//                                                                .addComponent(txtMaPB, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-//                                .addContainerGap())
-//        );
+
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         // TIÊU ĐỀ
@@ -171,29 +142,28 @@ public class DanhSachPB extends javax.swing.JPanel {
         );
 
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtMaPB, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtTenPB, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnThemPhong)
-                                        .addComponent(btnXoaPhong)
-                                        .addComponent(btnDoc)
-                                        .addComponent(btnLuu))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtMaPB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                        .addGap(10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtTenPB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                        .addGap(40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnThemPhong)
+                                .addComponent(btnXoaPhong)
+                                .addComponent(btnDoc)
+                                .addComponent(btnLuu))
+                        .addGap(30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
         );
 
-//        pack();
     }// </editor-fold>                        
 
     private void txtTenPBActionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,29 +266,6 @@ public class DanhSachPB extends javax.swing.JPanel {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            logger.log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        java.awt.EventQueue.invokeLater(() -> new DanhSachPB().setVisible(true));
-//    }
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnDoc;
     private javax.swing.JButton btnLuu;

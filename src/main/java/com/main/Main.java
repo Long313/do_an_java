@@ -5,6 +5,7 @@ import com.form.Bills_Form;
 import com.form.Home_Form;
 import com.form.Setting_Form;
 import com.form.Department_Form;
+import com.form.Export_Form;
 import com.form.Product_Form;
 import com.form.Staff_Form;
 import com.menu.EventMenu;
@@ -42,6 +43,8 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(new Product_Form());
                 } else if (index == 4) {
                     mainBody.displayForm(new Bills_Form());
+                } else if (index == 5) {
+                    mainBody.displayForm(new Export_Form());
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Setting");
                 }

@@ -137,20 +137,21 @@ public class DanhSachHoaDon extends JPanel {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
-        layout.setHorizontalGroup(layout.createParallelGroup()
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(lblTitle)
                 .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblMaHD)
                                 .addComponent(lblNhanVien)
                                 .addComponent(lblNgayLap)
                         )
                         .addGap(10)
-                        .addGroup(layout.createParallelGroup()
-                                .addComponent(txtMaHD, 200, 200, 200)
-                                .addComponent(cboNhanVien, 200, 200, 200)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(txtMaHD, 300, 300, 300)
+                                .addComponent(cboNhanVien, 300, 300, 300)
                                 .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtNgayLap, 150, 150, 150)
+                                        .addComponent(txtNgayLap, 245, 245, 245)
+                                        .addGap(5)
                                         .addComponent(btnDatePicker, 50, 50, 50)
                                 )
                         )
@@ -166,37 +167,39 @@ public class DanhSachHoaDon extends JPanel {
                         .addGap(10)
                         .addComponent(btnThemSP)
                 )
-                .addComponent(jScrollPaneHD, 400, 400, 400)
-                .addComponent(jScrollChiTiet, 400, 400, 400)
+                .addComponent(jScrollPaneHD, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollChiTiet, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addComponent(lblTitle)
-                .addGap(5)
+                .addGap(30)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(lblMaHD)
                         .addComponent(txtMaHD, 30, 30, 30)
                 )
+                .addGap(5)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNhanVien)
                         .addComponent(cboNhanVien, 30, 30, 30)
                 )
+                .addGap(5)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNgayLap)
                         .addComponent(txtNgayLap, 30, 30, 30)
-                        .addComponent(btnDatePicker)
+                        .addComponent(btnDatePicker, 30, 30, 30)
                 )
-                .addGap(5)
-                .addGroup(layout.createParallelGroup()
+                .addGap(30)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnThem)
                         .addComponent(btnXoa)
                         .addComponent(btnDoc)
                         .addComponent(btnLuu)
                         .addComponent(btnThemSP)
                 )
-                .addGap(5)
+                .addGap(20)
                 .addComponent(jScrollPaneHD, 150, 150, 150)
-                .addGap(5)
+                .addGap(10)
                 .addComponent(jScrollChiTiet, 150, 150, 150)
         );
 
@@ -308,7 +311,8 @@ public class DanhSachHoaDon extends JPanel {
     private void xoaForm() {
         txtMaHD.setText("");
         cboNhanVien.setSelectedIndex(0);
-        tblChiTiet.setModel(new DefaultTableModel(new Object[]{"Sản phẩm", "Số lượng", "Thành tiền"}, 0));
+        DefaultTableModel dtm = (DefaultTableModel) tblChiTiet.getModel();
+        dtm.setRowCount(0);
         ngayLapSelected = new Date();
         updateDateDisplay();
     }

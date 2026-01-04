@@ -42,6 +42,7 @@ com\form\Home_Form.class
 com\component\ColorOption$2.class
 com\dao\HoaDonDAO.class
 com\swing\SwitchButton$2.class
+com\form\Export_Form.class
 com\swing\win_button\WinButton$2.class
 com\swing\PanelBackground.class
 com\theme\ImageAvatar.class

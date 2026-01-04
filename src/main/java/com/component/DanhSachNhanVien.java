@@ -63,15 +63,10 @@ public class DanhSachNhanVien extends JPanel {
         cboPhong = new JComboBox<>();
 
         // ===== Custom DatePicker cho ngày sinh =====
-        datePickerPanel = new JPanel(new BorderLayout(5, 0));
         txtNgaySinh = new JTextField();
         txtNgaySinh.setEditable(false);
-        txtNgaySinh.setPreferredSize(new Dimension(250, 30));
         btnDatePicker = new JButton("📅");
-        btnDatePicker.setPreferredSize(new Dimension(40, 30));
         btnDatePicker.addActionListener(e -> showDatePickerDialog());
-        datePickerPanel.add(txtNgaySinh, BorderLayout.CENTER);
-        datePickerPanel.add(btnDatePicker, BorderLayout.EAST);
         selectedDate = new Date();
         updateDateDisplay();
 
@@ -135,7 +130,10 @@ public class DanhSachNhanVien extends JPanel {
                                         .addComponent(txtMaNV, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtHoTen, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cboGioiTinh, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(datePickerPanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtNgaySinh, 250, 250, 250)
+                                                .addGap(5)
+                                                .addComponent(btnDatePicker, 45, 45, 45))
                                         .addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtLuong, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cboPhong, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
@@ -156,14 +154,38 @@ public class DanhSachNhanVien extends JPanel {
                 layout.createSequentialGroup()
                         .addComponent(lblTitle)
                         .addGap(10)
-                        .addGroup(layout.createParallelGroup().addComponent(labels[0]).addComponent(txtMaNV))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[1]).addComponent(txtHoTen))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[2]).addComponent(cboGioiTinh))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[3]).addComponent(datePickerPanel))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[4]).addComponent(txtDiaChi))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[5]).addComponent(txtLuong))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[6]).addComponent(cboPhong))
-                        .addGroup(layout.createParallelGroup().addComponent(labels[7]).addComponent(chkTrangThai))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[0])
+                                .addComponent(txtMaNV, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[1])
+                                .addComponent(txtHoTen, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[2])
+                                .addComponent(cboGioiTinh, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[3])
+                                .addComponent(txtNgaySinh, 30, 30, 30)
+                                .addComponent(btnDatePicker, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[4])
+                                .addComponent(txtDiaChi, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[5])
+                                .addComponent(txtLuong, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[6])
+                                .addComponent(cboPhong, 30, 30, 30))
+                        .addGap(5)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(labels[7])
+                                .addComponent(chkTrangThai))
                         .addGap(15)
                         .addGroup(layout.createParallelGroup()
                                 .addComponent(btnThem)
@@ -391,7 +413,6 @@ public class DanhSachNhanVien extends JPanel {
 
     // ================= VARIABLES =================
     private JTextField txtMaNV, txtHoTen, txtDiaChi, txtLuong, txtNgaySinh;
-    private JPanel datePickerPanel;
     private JButton btnDatePicker;
     private Date selectedDate;
     private JComboBox<String> cboGioiTinh;
